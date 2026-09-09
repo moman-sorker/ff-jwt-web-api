@@ -574,11 +574,17 @@
         </div>
 
         <!-- Quick Actions -->
-        <!-- <div class="quick-actions">
+        <div class="quick-actions">
             <button class="btn btn-outline" onclick="copyToken()">
-                <i class="fas fa-copy"></i> Copy Token
+                <i class="fas fa-copy"></i> Copy JWT Token
             </button>
-        </div> -->
+        </div>
+        
+        <div class="quick-actions">
+            <button class="btn btn-outline" onclick="copyAccess()">
+                <i class="fas fa-copy"></i> Copy Access Token
+            </button>
+        </div>
 
         <!-- Response Section -->
         <div id="responseSection" class="response-section">
@@ -644,13 +650,13 @@
         }, 3000);
     }
 
-    // Copy Token
+    // Copy JWT Token
     function copyToken() {
-        const tokenElement = document.querySelector('.token-value');
+        const tokenElement = document.querySelector('.jwt-token-value');
         if (tokenElement) {
             const token = tokenElement.textContent.trim();
             navigator.clipboard.writeText(token).then(() => {
-                showToast('Token copied to clipboard!', 'success');
+                showToast('JWT Token copied to clipboard!', 'success');
             }).catch(() => {
                 // Fallback
                 const textarea = document.createElement('textarea');
@@ -659,7 +665,29 @@
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                showToast('Token copied to clipboard!', 'success');
+                showToast('JWT Token copied to clipboard!', 'success');
+            });
+        } else {
+            showToast('No token to copy', 'error');
+        }
+    }
+    
+    // Copy Access
+    function copyAccess() {
+        const token_accessElement = document.querySelector('.access-token-value');
+        if (token_accessElement) {
+            const token_access = token_accessElement.textContent.trim();
+            navigator.clipboard.writeText(token_access).then(() => {
+                showToast('Access Token copied to clipboard!', 'success');
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = token_access;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Access Token copied to clipboard!', 'success');
             });
         } else {
             showToast('No token to copy', 'error');
@@ -759,7 +787,7 @@
                 { key: 'api', label: 'API', icon: 'fa-code' },
                 { key: 'token', label: 'JWT Token', icon: 'fa-key', isToken: true },
                 { key: 'open_id', label: 'Open ID', icon: 'fa-fingerprint' },
-                { key: 'token_access', label: 'Access Token', icon: 'fa-lock', isToken: true },
+                { key: 'token_access', label: 'Access Token', icon: 'fa-lock', isAccess: true },
                 { key: 'status_code', label: 'Status Code', icon: 'fa-check-circle' },
             ];
 
@@ -770,8 +798,12 @@
                     let extraHtml = '';
 
                     if (field.isToken) {
-                        extraClass = 'token token-value';
+                        extraClass = 'token jwt-token-value';
                         extraHtml = `<button class="copy-btn" onclick="copyToken()" title="Copy"><i class="fas fa-copy"></i></button>`;
+                    }
+                    if (field.isAccess) {
+                        extraClass = 'token access-token-value';
+                        extraHtml = `<button class="copy-btn" onclick="copyAccess()" title="Copy"><i class="fas fa-copy"></i></button>`;
                     }
 
                     if (field.key === 'level' || field.key === 'exp') {
