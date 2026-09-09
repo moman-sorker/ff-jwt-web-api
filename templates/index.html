@@ -523,7 +523,9 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <div class="logo">FF Token Generator</div>
+        <div class="logo">
+            <i class="fas fa-fire"></i> FF Token Generator
+        </div>
         <div class="subtitle">
             <i class="fas fa-shield-alt" style="color: #4d96ff;"></i>
             Secure &bull; Fast &bull; Reliable
@@ -575,13 +577,7 @@
 
         <!-- Quick Actions -->
         <div class="quick-actions">
-            <!-- <button class="btn btn-outline" onclick="setExample1()">
-                <i class="fas fa-user"></i> Test User
-            </button>
-            <button class="btn btn-outline" onclick="setExample2()">
-                <i class="fas fa-user"></i> Test User 2
-            </button> -->
-            <button class="btn btn-outline" onclick="if (!window.__cfRLUnblockHandlers) return false; copyToken()" data-cf-modified-f7c3caf5fbcda0fd08655f40-="">
+            <button class="btn btn-outline" onclick="copyToken()">
                 <i class="fas fa-copy"></i> Copy Token
             </button>
         </div>
@@ -613,7 +609,7 @@
     <span id="toastMessage">Success!</span>
 </div>
 
-<script type="f7c3caf5fbcda0fd08655f40-text/javascript">
+<script>
     // DOM Elements
     const uidInput = document.getElementById('uidInput');
     const passwordInput = document.getElementById('passwordInput');
@@ -763,7 +759,7 @@
                 { key: 'exp', label: 'Experience', icon: 'fa-star' },
                 { key: 'server', label: 'Server', icon: 'fa-globe' },
                 { key: 'api', label: 'API', icon: 'fa-code' },
-                { key: 'token', label: 'Token', icon: 'fa-key', isToken: true },
+                { key: 'token', label: 'JWT Token', icon: 'fa-key', isToken: true },
                 { key: 'open_id', label: 'Open ID', icon: 'fa-fingerprint' },
                 { key: 'token_access', label: 'Access Token', icon: 'fa-lock', isToken: true },
                 { key: 'status_code', label: 'Status Code', icon: 'fa-check-circle' },
@@ -851,5 +847,5 @@
     }
     checkHealth();
 </script>
-<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="f7c3caf5fbcda0fd08655f40-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3837b5f5b52a01c',t:'MTc4ODkyODQ4MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
