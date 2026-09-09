@@ -574,13 +574,11 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="quick-actions">
+        <div id="quickActions" class="quick-actions" style="display: none;">
             <button class="btn btn-outline" onclick="copyToken()">
                 <i class="fas fa-copy"></i> Copy JWT Token
             </button>
-        </div>
         
-        <div class="quick-actions">
             <button class="btn btn-outline" onclick="copyAccess()">
                 <i class="fas fa-copy"></i> Copy Access Token
             </button>
@@ -625,7 +623,8 @@
     const statusBadge = document.getElementById('statusBadge');
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-
+    const quickActions = document.getElementById('quickActions');
+    
     // Example accounts
     function setExample1() {
         uidInput.value = '1234567890';
@@ -750,14 +749,24 @@
             statusBadge.innerHTML = '<i class="fas fa-times-circle"></i> Error';
         } finally {
             generateBtn.disabled = false;
-            btnText.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Generate Token';
+            btnText.innerHTML = 'Generate Token';
         }
     }
 
     // Display Response
     function displayResponse(data) {
         responseSection.classList.add('active');
-
+        // Show copy buttons only after a successful response
+        const isError =
+            data.error === true ||
+            data.error === 'True' ||
+            data.status_code >= 400;
+    
+        if (isError) {
+            quickActions.style.display = 'none';
+        } else {
+            quickActions.style.display = 'flex';
+        }
         let html = '';
 
         // Check if error
@@ -844,6 +853,9 @@
         passwordInput.classList.remove('error');
         responseSection.classList.remove('active');
         responseContent.innerHTML = '';
+    
+        quickActions.style.display = 'none';
+    
         showToast('Cleared', 'success');
     }
 
